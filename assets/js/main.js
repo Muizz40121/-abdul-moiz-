@@ -76,125 +76,89 @@ const Auth = {
 
 // ===================== AUTH UI UPDATER =====================
 function updateAuthUI() {
-  const user = Auth.getCurrentUser();
-  const isLoggedIn = Auth.isLoggedIn();
+  try {
+    const user = Auth.getCurrentUser();
+    const isLoggedIn = Auth.isLoggedIn();
 
-  // Find all login links and user avatar sections in navbars
-  const loginLinks = document.querySelectorAll('a[href*="login.html"], a[href*="register.html"]');
-  const userMenus = document.querySelectorAll('[data-user-menu]');
-  const guestMenus = document.querySelectorAll('[data-guest-menu]');
-  const userNameSpans = document.querySelectorAll('[data-user-name]');
+    document.querySelectorAll('[data-guest-menu]').forEach(el => el.style.display = isLoggedIn ? 'none' : '');
+    document.querySelectorAll('[data-user-menu]').forEach(el => el.style.display = isLoggedIn ? 'flex' : 'none');
+    document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = isLoggedIn ? Auth.getFullName(user) : 'User');
+  } catch (e) {}
+}
 
-  if (isLoggedIn && user) {
-    loginLinks.forEach(el => {
-      const parent = el.closest('a') ? el.closest('a') : el;
-      if (parent.href && (parent.href.includes('login.html') || parent.href.includes('register.html'))) {
-        parent.style.display = 'none';
-      }
-    });
-    guestMenus.forEach(el => el.style.display = 'none');
-    userMenus.forEach(el => el.style.display = 'flex');
-    userNameSpans.forEach(el => el.textContent = Auth.getFullName(user));
+// ===================== HANDLE AUTH FORMS =====================
+function handleRegister(e) {
+  e.preventDefault();
+  const msg = document.getElementById('registerMessage');
+  if (!msg) return;
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+  if (password.length < 8) {
+    msg.className = 'alert alert-danger'; msg.textContent = 'Password must be at least 8 characters.'; msg.classList.remove('d-none');
+    return;
+  }
+  if (password !== confirmPassword) {
+    msg.className = 'alert alert-danger'; msg.textContent = 'Passwords do not match.'; msg.classList.remove('d-none');
+    return;
+  }
+  const result = Auth.register(
+    document.getElementById('regFirstName').value.trim(),
+    document.getElementById('regLastName').value.trim(),
+    document.getElementById('regEmail').value.trim(),
+    document.getElementById('regPhone').value.trim(),
+    password
+  );
+  msg.className = result.success ? 'alert alert-success' : 'alert alert-danger';
+  msg.textContent = result.message;
+  msg.classList.remove('d-none');
+  if (result.success) {
+    setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+  }
+}
 
-    // Update navbar profile link href
-    const profileLinks = document.querySelectorAll('a[href*="profile.html"]');
-    if (profileLinks.length === 0) {
-      document.querySelectorAll('.navbar-nav .nav-link, .top-nav a').forEach(el => {
-        if (el.textContent.trim().includes('Profile') || el.textContent.trim() === 'My Account') {
-          el.style.display = '';
-        }
-      });
-    }
-  } else {
-    guestMenus.forEach(el => el.style.display = '');
-    userMenus.forEach(el => el.style.display = 'none');
-    loginLinks.forEach(el => { if (el.style) el.style.display = ''; });
+function handleLogin(e) {
+  e.preventDefault();
+  const msg = document.getElementById('loginMessage');
+  if (!msg) return;
+  const result = Auth.login(
+    document.getElementById('loginEmail').value.trim(),
+    document.getElementById('loginPassword').value,
+    document.getElementById('remember').checked
+  );
+  msg.className = result.success ? 'alert alert-success' : 'alert alert-danger';
+  msg.textContent = result.message;
+  msg.classList.remove('d-none');
+  if (result.success) {
+    setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
+      window.location.href = params.get('redirect') || '../index.html';
+    }, 1000);
   }
 }
 
 // ===================== DOM READY =====================
 document.addEventListener('DOMContentLoaded', function () {
 
-  // --- Auth UI update on every page ---
   updateAuthUI();
 
-  // --- Logout buttons ---
   document.querySelectorAll('[data-logout]').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      Auth.logout();
-    });
+    btn.addEventListener('click', function (e) { e.preventDefault(); Auth.logout(); });
   });
 
-  // ============================================================
-  // --- REGISTER FORM ---
   const registerForm = document.getElementById('registerForm');
-  const registerMessage = document.getElementById('registerMessage');
   if (registerForm) {
-    registerForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const firstName = document.getElementById('regFirstName').value.trim();
-      const lastName = document.getElementById('regLastName').value.trim();
-      const email = document.getElementById('regEmail').value.trim();
-      const phone = document.getElementById('regPhone').value.trim();
-      const password = document.getElementById('regPassword').value;
-      const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-      if (password.length < 8) {
-        registerMessage.className = 'alert alert-danger';
-        registerMessage.textContent = 'Password must be at least 8 characters.';
-        registerMessage.classList.remove('d-none');
-        return;
-      }
-      if (password !== confirmPassword) {
-        registerMessage.className = 'alert alert-danger';
-        registerMessage.textContent = 'Passwords do not match.';
-        registerMessage.classList.remove('d-none');
-        return;
-      }
-
-      const result = Auth.register(firstName, lastName, email, phone, password);
-      registerMessage.className = result.success ? 'alert alert-success' : 'alert alert-danger';
-      registerMessage.textContent = result.message;
-      registerMessage.classList.remove('d-none');
-
-      if (result.success) {
-        registerForm.reset();
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 1500);
-      }
-    });
+    registerForm.addEventListener('submit', handleRegister);
+    const btn = registerForm.querySelector('button[type="submit"]');
+    if (btn) btn.addEventListener('click', handleRegister);
   }
 
-  // ============================================================
-  // --- LOGIN FORM ---
   const loginForm = document.getElementById('loginForm');
-  const loginMessage = document.getElementById('loginMessage');
   if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value;
-      const remember = document.getElementById('remember').checked;
-
-      const result = Auth.login(email, password, remember);
-      loginMessage.className = result.success ? 'alert alert-success' : 'alert alert-danger';
-      loginMessage.textContent = result.message;
-      loginMessage.classList.remove('d-none');
-
-      if (result.success) {
-        setTimeout(() => {
-          const params = new URLSearchParams(window.location.search);
-          const redirect = params.get('redirect') || '../index.html';
-          window.location.href = redirect;
-        }, 1000);
-      }
-    });
+    loginForm.addEventListener('submit', handleLogin);
+    const btn = loginForm.querySelector('button[type="submit"]');
+    if (btn) btn.addEventListener('click', handleLogin);
   }
 
-  // ============================================================
-  // --- PROTECTED PAGES (redirect to login if not authenticated) ---
   const protectedPaths = ['my-ads.html', 'favorites.html', 'messages.html', 'profile.html', 'post-ad.html'];
   const currentPage = window.location.pathname.split('/').pop();
   if (protectedPaths.includes(currentPage) && !Auth.isLoggedIn()) {

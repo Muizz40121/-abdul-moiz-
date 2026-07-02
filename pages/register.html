@@ -19,29 +19,29 @@
 
       <div id="registerMessage" class="alert d-none"></div>
 
-      <form id="registerForm">
+      <form id="registerForm" novalidate>
         <div class="row g-2 mb-3">
           <div class="col-6">
             <label class="form-label">First Name</label>
-            <input type="text" class="form-control form-control-lg" id="regFirstName" placeholder="First name" required>
+            <input type="text" class="form-control form-control-lg" id="regFirstName" placeholder="First name">
           </div>
           <div class="col-6">
             <label class="form-label">Last Name</label>
-            <input type="text" class="form-control form-control-lg" id="regLastName" placeholder="Last name" required>
+            <input type="text" class="form-control form-control-lg" id="regLastName" placeholder="Last name">
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Email Address</label>
-          <input type="email" class="form-control form-control-lg" id="regEmail" placeholder="Enter email" required>
+          <input type="email" class="form-control form-control-lg" id="regEmail" placeholder="Enter email">
         </div>
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-control form-control-lg" id="regPhone" placeholder="03XX-XXXXXXX" required>
+          <input type="tel" class="form-control form-control-lg" id="regPhone" placeholder="03XX-XXXXXXX">
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
           <div class="input-group">
-            <input type="password" class="form-control form-control-lg" id="regPassword" placeholder="Create password" required>
+            <input type="password" class="form-control form-control-lg" id="regPassword" placeholder="Create password">
             <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#regPassword">
               <i class="far fa-eye"></i>
             </button>
@@ -50,10 +50,10 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Confirm Password</label>
-          <input type="password" class="form-control form-control-lg" id="regConfirmPassword" placeholder="Confirm password" required>
+          <input type="password" class="form-control form-control-lg" id="regConfirmPassword" placeholder="Confirm password">
         </div>
         <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" id="terms" required>
+          <input class="form-check-input" type="checkbox" id="terms">
           <label class="form-check-label small" for="terms">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></label>
         </div>
         <button type="submit" class="btn btn-post-ad w-100 py-2" style="border-radius:8px;">Create Account</button>
