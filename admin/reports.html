@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand"><i class="fas fa-store-alt me-2"></i> Admin</div>
+    <nav>
+      <a href="index.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a>
+      <a href="ads.html" class="nav-link"><i class="fas fa-list"></i> Advertisements</a>
+      <a href="categories.html" class="nav-link"><i class="fas fa-th-large"></i> Categories</a>
+      <a href="payments.html" class="nav-link"><i class="fas fa-money-bill"></i> Payments</a>
+      <a href="reports.html" class="nav-link active"><i class="fas fa-chart-bar"></i> Reports</a>
+      <hr style="border-color:rgba(255,255,255,0.1);">
+      <a href="../../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a href="#" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <div>
+        <button class="btn btn-sm btn-outline-secondary me-2" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+        <span class="fw-bold">Reports & Analytics</span>
+      </div>
+      <div class="d-flex gap-2">
+        <select class="form-select form-select-sm" style="width:auto;">
+          <option>Last 7 Days</option>
+          <option>Last 30 Days</option>
+          <option>This Year</option>
+          <option>All Time</option>
+        </select>
+        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-download"></i> Export</button>
+      </div>
+    </div>
+    <div class="admin-content">
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="bg-white rounded shadow-sm p-3">
+            <h6 class="fw-bold mb-3"><i class="fas fa-chart-line me-2 text-primary-custom"></i>Monthly Revenue</h6>
+            <div class="d-flex justify-content-between align-items-end" style="height:150px;">
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:40px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">Jan</small>
+              </div>
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:60px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">Feb</small>
+              </div>
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:55px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">Mar</small>
+              </div>
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:80px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">Apr</small>
+              </div>
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:70px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">May</small>
+              </div>
+              <div style="width:12%;text-align:center;">
+                <div style="background:#4e73df;height:100px;border-radius:4px 4px 0 0;"></div>
+                <small class="text-muted">Jun</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-white rounded shadow-sm p-3">
+            <h6 class="fw-bold mb-3"><i class="fas fa-chart-pie me-2 text-primary-custom"></i>Ads by Category</h6>
+            <div class="mb-2"><small>Vehicles</small><div class="progress" style="height:8px;"><div class="progress-bar bg-primary" style="width:35%"></div></div><small class="text-muted">35%</small></div>
+            <div class="mb-2"><small>Mobile Phones</small><div class="progress" style="height:8px;"><div class="progress-bar bg-success" style="width:25%"></div></div><small class="text-muted">25%</small></div>
+            <div class="mb-2"><small>Property</small><div class="progress" style="height:8px;"><div class="progress-bar bg-warning" style="width:18%"></div></div><small class="text-muted">18%</small></div>
+            <div class="mb-2"><small>Electronics</small><div class="progress" style="height:8px;"><div class="progress-bar bg-info" style="width:12%"></div></div><small class="text-muted">12%</small></div>
+            <div class="mb-2"><small>Others</small><div class="progress" style="height:8px;"><div class="progress-bar bg-danger" style="width:10%"></div></div><small class="text-muted">10%</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded shadow-sm p-3">
+        <h6 class="fw-bold mb-3"><i class="fas fa-table me-2 text-primary-custom"></i>Summary Report</h6>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead><tr><th>Metric</th><th>Today</th><th>This Week</th><th>This Month</th><th>All Time</th></tr></thead>
+            <tbody>
+              <tr><td>New Users</td><td>24</td><td>156</td><td>678</td><td>24,567</td></tr>
+              <tr><td>New Ads</td><td>45</td><td>289</td><td>1,234</td><td>45,678</td></tr>
+              <tr><td>Revenue</td><td>PKR 12,500</td><td>PKR 78,000</td><td>PKR 3,45,000</td><td>PKR 42,00,000</td></tr>
+              <tr><td>Messages Sent</td><td>156</td><td>1,023</td><td>4,567</td><td>89,012</td></tr>
+              <tr><td>Featured Ads</td><td>8</td><td>52</td><td>198</td><td>3,456</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

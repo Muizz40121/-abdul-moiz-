@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace - Buy & Sell Near You</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ============ TOP BAR ============ -->
+  <div class="top-nav d-none d-md-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div data-guest-menu>
+        <a href="#"><i class="fas fa-globe me-1"></i> English</a>
+        <a href="pages/login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+        <a href="pages/register.html"><i class="fas fa-user-plus me-1"></i> Register</a>
+      </div>
+      <div data-user-menu style="display:none;">
+        <a href="pages/profile.html"><i class="fas fa-user-circle me-1"></i> <span data-user-name>User</span></a>
+        <a href="#" data-logout><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
+      </div>
+      <div>
+        <a href="#"><i class="fas fa-question-circle me-1"></i> Help</a>
+        <a href="#"><i class="fas fa-shield-alt me-1"></i> Safety</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN HEADER ============ -->
+  <header class="main-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg p-0">
+        <a class="navbar-brand fw-bold fs-4" href="index.html" style="color:var(--primary);">
+          <i class="fas fa-store-alt"></i> MarketPlace
+        </a>
+
+        <div class="d-flex align-items-center gap-2 d-lg-none">
+          <button class="btn btn-sm btn-outline-secondary" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <a href="pages/post-ad.html" class="btn-post-ad btn-sm py-1 px-3">+ Sell</a>
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <div class="d-flex flex-grow-1 align-items-center gap-3 ms-3 my-2 my-lg-0">
+            <div class="search-box flex-grow-1">
+              <select>
+                <option>All Categories</option>
+                <option>Vehicles</option>
+                <option>Property</option>
+                <option>Mobile Phones</option>
+                <option>Electronics</option>
+                <option>Fashion</option>
+                <option>Furniture</option>
+                <option>Jobs</option>
+                <option>Services</option>
+              </select>
+              <input type="text" placeholder="Find Cars, Mobiles, Phones & more...">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+            <a href="pages/login.html" class="text-dark text-nowrap d-none d-lg-inline" data-guest-menu><i class="far fa-user-circle me-1"></i> Login</a>
+            <div class="dropdown d-none d-lg-inline-block" data-user-menu style="display:none;">
+              <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" style="background:none;border:none;color:var(--text-dark);">
+                <i class="far fa-user-circle me-1"></i> <span data-user-name>User</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="pages/profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="pages/my-ads.html"><i class="fas fa-list me-2"></i>My Ads</a></li>
+                <li><a class="dropdown-item" href="pages/favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+                <li><a class="dropdown-item" href="pages/messages.html"><i class="fas fa-comment me-2"></i>Messages</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#" data-logout><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+              </ul>
+            </div>
+            <a href="pages/post-ad.html" class="btn-post-ad d-none d-lg-inline"><i class="fas fa-plus-circle me-1"></i> SELL</a>
+          </div>
+        </div>
+      </nav>
+      <!-- Mobile search -->
+      <div class="d-none mt-2" id="mobileSearch">
+        <div class="search-box">
+          <select class="d-none d-sm-block">
+            <option>All</option>
+            <option>Vehicles</option>
+            <option>Phones</option>
+          </select>
+          <input type="text" placeholder="Search...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO BANNER ============ -->
+  <section class="hero-banner">
+    <div class="container">
+      <h1>Find What You Need, Sell What You Don't</h1>
+      <p class="mb-3">Buy & sell cars, mobiles, furniture, electronics & more</p>
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="search-box bg-white border-0">
+            <select>
+              <option>All Categories</option>
+              <option>Vehicles</option>
+              <option>Property</option>
+              <option>Mobile Phones</option>
+              <option>Electronics</option>
+            </select>
+            <input type="text" placeholder="What are you looking for?">
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-th-large me-2 text-primary-custom"></i>Browse by Category</h2>
+      <div class="category-grid">
+        <div class="category-item" data-category="Vehicles">
+          <div class="icon"><i class="fas fa-car"></i></div>
+          <div class="label">Vehicles</div>
+        </div>
+        <div class="category-item" data-category="Property">
+          <div class="icon"><i class="fas fa-home"></i></div>
+          <div class="label">Property</div>
+        </div>
+        <div class="category-item" data-category="Mobile Phones">
+          <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="label">Mobiles</div>
+        </div>
+        <div class="category-item" data-category="Electronics">
+          <div class="icon"><i class="fas fa-tv"></i></div>
+          <div class="label">Electronics</div>
+        </div>
+        <div class="category-item" data-category="Fashion">
+          <div class="icon"><i class="fas fa-tshirt"></i></div>
+          <div class="label">Fashion</div>
+        </div>
+        <div class="category-item" data-category="Furniture">
+          <div class="icon"><i class="fas fa-couch"></i></div>
+          <div class="label">Furniture</div>
+        </div>
+        <div class="category-item" data-category="Jobs">
+          <div class="icon"><i class="fas fa-briefcase"></i></div>
+          <div class="label">Jobs</div>
+        </div>
+        <div class="category-item" data-category="Services">
+          <div class="icon"><i class="fas fa-concierge-bell"></i></div>
+          <div class="label">Services</div>
+        </div>
+        <div class="category-item" data-category="Pets">
+          <div class="icon"><i class="fas fa-paw"></i></div>
+          <div class="label">Pets</div>
+        </div>
+        <div class="category-item" data-category="Books">
+          <div class="icon"><i class="fas fa-book"></i></div>
+          <div class="label">Books</div>
+        </div>
+        <div class="category-item" data-category="Sports">
+          <div class="icon"><i class="fas fa-futbol"></i></div>
+          <div class="label">Sports</div>
+        </div>
+        <div class="category-item" data-category="Kids">
+          <div class="icon"><i class="fas fa-baby"></i></div>
+          <div class="label">Kids</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED ADS ============ -->
+  <section class="pb-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="section-title mb-0"><i class="fas fa-star me-2 text-primary-custom"></i>Featured Ads</h2>
+        <a href="pages/product-listing.html" class="text-decoration-none">View All <i class="fas fa-arrow-right ms-1"></i></a>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <span class="featured-badge">FEATURED</span>
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Car" alt="Car">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 15,00,000</div>
+              <div class="title">Toyota Corolla 2020 - Excellent Condition</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> Today</span>
+                <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <span class="featured-badge">FEATURED</span>
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone" alt="iPhone">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 1,20,000</div>
+              <div class="title">iPhone 15 Pro Max 256GB - Brand New</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 2 hours ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <span class="featured-badge">FEATURED</span>
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=House" alt="House">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 85,00,000</div>
+              <div class="title">3 Bedroom House for Sale in DHA Phase 6</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> Yesterday</span>
+                <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Laptop" alt="Laptop">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 65,000</div>
+              <div class="title">Dell XPS 15 - Core i7 16GB RAM 512GB SSD</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 3 days ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Islamabad</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RECENT ADS ============ -->
+  <section class="pb-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="section-title mb-0"><i class="fas fa-clock me-2 text-primary-custom"></i>Recent Listings</h2>
+        <a href="pages/product-listing.html" class="text-decoration-none">View All <i class="fas fa-arrow-right ms-1"></i></a>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Sofa" alt="Sofa">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 25,000</div>
+              <div class="title">Modern 3-Seater Sofa Set - Premium Fabric</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 30 min ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Bike" alt="Bike">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 1,80,000</div>
+              <div class="title">Honda CG 125 - 2023 Model - First Owner</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 1 hour ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Faisalabad</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=AC" alt="AC">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 45,000</div>
+              <div class="title">Gree Inverter AC 1.5 Ton - Cool & Heat</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 3 hours ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Rawalpindi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="ad-card" data-href="pages/product-detail.html">
+            <div class="img-wrap">
+              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Watch" alt="Watch">
+              <button class="fav-btn"><i class="far fa-heart"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="price">PKR 8,500</div>
+              <div class="title">Casio G-Shock Original - Digital Watch</div>
+              <div class="meta">
+                <span><i class="far fa-clock"></i> 5 hours ago</span>
+                <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center bg-white rounded-custom shadow-custom p-4 p-md-5">
+        <div class="col-md-7">
+          <h3 class="fw-bold">Start Selling on MarketPlace Today!</h3>
+          <p class="text-muted mb-3">Reach thousands of buyers in your city. Post your ad for free in just 2 minutes.</p>
+          <a href="pages/post-ad.html" class="btn btn-lg btn-post-ad"><i class="fas fa-plus-circle me-2"></i>Post Your Ad Now</a>
+        </div>
+        <div class="col-md-5 text-center mt-3 mt-md-0">
+          <i class="fas fa-store-alt" style="font-size:100px;color:var(--primary);opacity:0.3;"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h6><i class="fas fa-store-alt me-2"></i>MarketPlace</h6>
+          <p style="font-size:14px;">Pakistan's fastest growing online classified marketplace. Buy & sell cars, mobiles, houses, electronics & more.</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="btn btn-sm btn-outline-light"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Popular</h6>
+          <a href="#">Cars</a>
+          <a href="#">Mobiles</a>
+          <a href="#">Houses</a>
+          <a href="#">Tablets</a>
+          <a href="#">Bikes</a>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>About</h6>
+          <a href="pages/about.html">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+          <a href="pages/contact.html">Contact</a>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Help</h6>
+          <a href="#">FAQ</a>
+          <a href="#">Safety Tips</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Report Abuse</a>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6>Follow Us</h6>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        &copy; 2026 MarketPlace. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - MarketPlace</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg p-0">
+        <a class="navbar-brand fw-bold fs-4" href="../index.html" style="color:var(--primary);"><i class="fas fa-store-alt"></i> MarketPlace</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link active fw-bold" href="contact.html">Contact</a></li>
+            <li class="nav-item" data-guest-menu><a class="nav-link" href="login.html">Login</a></li>
+            <li class="nav-item dropdown" data-user-menu style="display:none;">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><span data-user-name>User</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="my-ads.html"><i class="fas fa-list me-2"></i>My Ads</a></li>
+                <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+                <li><a class="dropdown-item" href="messages.html"><i class="fas fa-comment me-2"></i>Messages</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#" data-logout><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-banner" style="padding:30px 0;">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We're here to help. Get in touch with our team.</p>
+    </div>
+  </section>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="bg-white rounded shadow-sm p-4">
+          <h4 class="fw-bold mb-3">Send us a Message</h4>
+          <form>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Your Name</label>
+                <input type="text" class="form-control form-control-lg" placeholder="Full name">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Your Email</label>
+                <input type="email" class="form-control form-control-lg" placeholder="Email address">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Subject</label>
+                <select class="form-select form-select-lg">
+                  <option>General Inquiry</option>
+                  <option>Report a Problem</option>
+                  <option>Advertising</option>
+                  <option>Partnership</option>
+                  <option>Complaint</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Message</label>
+                <textarea class="form-control" rows="5" placeholder="Describe your issue or question..."></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-post-ad px-5 py-2" style="border-radius:6px;">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="bg-white rounded shadow-sm p-4 mb-3">
+          <h5 class="fw-bold mb-3"><i class="fas fa-phone-alt me-2 text-primary-custom"></i>Contact Information</h5>
+          <div class="mb-3">
+            <div class="fw-semibold">Customer Support</div>
+            <a href="tel:+923001234567" style="font-size:15px;">0300-1234567</a>
+          </div>
+          <div class="mb-3">
+            <div class="fw-semibold">Email</div>
+            <a href="mailto:support@marketplace.pk" style="font-size:15px;">support@marketplace.pk</a>
+          </div>
+          <div class="mb-3">
+            <div class="fw-semibold">WhatsApp</div>
+            <a href="https://wa.me/923001234567" style="font-size:15px;">0300-1234567</a>
+          </div>
+          <div>
+            <div class="fw-semibold">Office Address</div>
+            <p class="mb-0" style="font-size:15px;">123, Main Boulevard, Gulberg III, Lahore, Pakistan</p>
+          </div>
+        </div>
+        <div class="bg-white rounded shadow-sm p-4">
+          <h5 class="fw-bold mb-3"><i class="fas fa-clock me-2 text-primary-custom"></i>Business Hours</h5>
+          <table class="table table-sm table-borderless">
+            <tr><td>Monday - Friday</td><td class="fw-semibold">9:00 AM - 6:00 PM</td></tr>
+            <tr><td>Saturday</td><td class="fw-semibold">10:00 AM - 4:00 PM</td></tr>
+            <tr><td>Sunday</td><td class="fw-semibold">Closed</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer" style="margin-top:20px;">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h6><i class="fas fa-store-alt me-2"></i>MarketPlace</h6>
+          <p style="font-size:14px;">Pakistan's fastest growing online classified marketplace.</p>
+        </div>
+        <div class="col-6 col-md-2"><h6>Popular</h6><a href="#">Cars</a><a href="#">Mobiles</a><a href="#">Houses</a></div>
+        <div class="col-6 col-md-2"><h6>About</h6><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
+        <div class="col-6 col-md-2"><h6>Help</h6><a href="#">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+        <div class="col-6 col-md-2"><h6>Follow</h6><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a></div>
+      </div>
+      <div class="footer-bottom text-center">&copy; 2026 MarketPlace. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

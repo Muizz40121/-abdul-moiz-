@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories - Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand"><i class="fas fa-store-alt me-2"></i> Admin</div>
+    <nav>
+      <a href="index.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a>
+      <a href="ads.html" class="nav-link"><i class="fas fa-list"></i> Advertisements</a>
+      <a href="categories.html" class="nav-link active"><i class="fas fa-th-large"></i> Categories</a>
+      <a href="payments.html" class="nav-link"><i class="fas fa-money-bill"></i> Payments</a>
+      <a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a>
+      <hr style="border-color:rgba(255,255,255,0.1);">
+      <a href="../../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a href="#" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+    <div class="admin-header">
+      <div>
+        <button class="btn btn-sm btn-outline-secondary me-2" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+        <span class="fw-bold">Categories</span>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-post-ad py-1 px-3"><i class="fas fa-plus-circle me-1"></i> Add Category</button>
+      </div>
+    </div>
+    <div class="admin-content">
+      <div class="bg-white rounded shadow-sm p-3">
+        <table class="table table-hover">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Slug</th><th>Ads Count</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><i class="fas fa-car me-2 text-primary-custom"></i>Vehicles</td><td>vehicles</td><td>3,245</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>2</td><td><i class="fas fa-home me-2 text-primary-custom"></i>Property</td><td>property</td><td>2,189</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>3</td><td><i class="fas fa-mobile-alt me-2 text-primary-custom"></i>Mobile Phones</td><td>mobile-phones</td><td>4,567</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>4</td><td><i class="fas fa-tv me-2 text-primary-custom"></i>Electronics</td><td>electronics</td><td>1,876</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>5</td><td><i class="fas fa-tshirt me-2 text-primary-custom"></i>Fashion</td><td>fashion</td><td>987</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>6</td><td><i class="fas fa-couch me-2 text-primary-custom"></i>Furniture</td><td>furniture</td><td>654</td><td><span class="badge bg-secondary">Inactive</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-success"><i class="fas fa-check"></i></button></td></tr>
+            <tr><td>7</td><td><i class="fas fa-briefcase me-2 text-primary-custom"></i>Jobs</td><td>jobs</td><td>432</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td>8</td><td><i class="fas fa-concierge-bell me-2 text-primary-custom"></i>Services</td><td>services</td><td>789</td><td><span class="badge bg-success">Active</span></td><td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
