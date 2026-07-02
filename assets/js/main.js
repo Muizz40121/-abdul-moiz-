@@ -77,13 +77,14 @@ const Auth = {
 // ===================== AUTH UI UPDATER =====================
 function updateAuthUI() {
   try {
-    const user = Auth.getCurrentUser();
     const isLoggedIn = Auth.isLoggedIn();
-
-    document.querySelectorAll('[data-guest-menu]').forEach(el => el.style.display = isLoggedIn ? 'none' : '');
-    document.querySelectorAll('[data-user-menu]').forEach(el => el.style.display = isLoggedIn ? 'flex' : 'none');
-    document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = isLoggedIn ? Auth.getFullName(user) : 'User');
-  } catch (e) {}
+    const user = Auth.getCurrentUser();
+    document.querySelectorAll('[data-guest-menu]').forEach(el => el.classList.toggle('d-none', isLoggedIn));
+    document.querySelectorAll('[data-user-menu]').forEach(el => el.classList.toggle('d-none', !isLoggedIn));
+    document.querySelectorAll('[data-user-name]').forEach(el => {
+      el.textContent = isLoggedIn ? Auth.getFullName(user) : 'User';
+    });
+  } catch (e) { console.error('Auth UI error:', e); }
 }
 
 // ===================== HANDLE AUTH FORMS =====================
@@ -148,15 +149,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', handleRegister);
-    const btn = registerForm.querySelector('button[type="submit"]');
-    if (btn) btn.addEventListener('click', handleRegister);
   }
 
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
-    const btn = loginForm.querySelector('button[type="submit"]');
-    if (btn) btn.addEventListener('click', handleLogin);
   }
 
   const protectedPaths = ['my-ads.html', 'favorites.html', 'messages.html', 'profile.html', 'post-ad.html'];
