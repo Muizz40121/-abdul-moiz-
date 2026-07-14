@@ -1,0 +1,17 @@
+{
+  "name": "pakbazaar",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "jsonwebtoken": "^9.0.3",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^1.41.0",
+    "multer": "^2.2.0"
+  }
+}

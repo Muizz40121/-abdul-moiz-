@@ -3,22 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Results - MarketPlace</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <title>Search Results - PakBazaar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-  <!-- ============ HEADER ============ -->
   <header class="main-header">
     <div class="container">
       <nav class="navbar navbar-expand-lg p-0">
-        <a class="navbar-brand fw-bold fs-4" href="../index.html" style="color:var(--primary);">
-          <i class="fas fa-store-alt"></i> MarketPlace
-        </a>
+        <a class="navbar-brand fw-bold" href="../index.html"><i class="fas fa-store-alt"></i> PakBazaar</a>
         <div class="d-flex d-lg-none gap-2">
-          <a href="../pages/post-ad.html" class="btn-post-ad btn-sm py-1 px-3">+ Sell</a>
+          <a href="../pages/post-ad.html" class="btn-post-ad btn-sm py-1 px-3" style="font-size:12px;">+ Sell</a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -36,9 +34,9 @@
               <input type="text" value="iPhone" placeholder="Search...">
               <button><i class="fas fa-search"></i></button>
             </div>
-            <a href="login.html" class="text-dark text-nowrap d-none d-lg-inline" data-guest-menu><i class="far fa-user-circle me-1"></i> Login</a>
+            <a href="login.html" class="text-dark text-nowrap d-none d-lg-inline fw-medium" data-guest-menu style="font-size:14px;"><i class="far fa-user-circle me-1"></i> Login</a>
             <div class="dropdown d-none d-lg-inline-block" data-user-menu style="display:none;">
-              <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" style="background:none;border:none;color:var(--text-dark);">
+              <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" style="background:none;border:none;color:var(--text-primary);font-weight:500;">
                 <i class="far fa-user-circle me-1"></i> <span data-user-name>User</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -47,6 +45,7 @@
                 <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
                 <li><a class="dropdown-item" href="messages.html"><i class="fas fa-comment me-2"></i>Messages</a></li>
                 <li><hr class="dropdown-divider"></li>
+                <li data-admin-menu class="hidden"><a class="dropdown-item" href="../admin/index.html"><i class="fas fa-shield-alt me-2"></i>Admin Panel</a></li>
                 <li><a class="dropdown-item text-danger" href="#" data-logout><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
               </ul>
             </div>
@@ -62,21 +61,22 @@
       <!-- ============ FILTERS ============ -->
       <div class="col-lg-3 mb-4">
         <div class="filter-sidebar">
-          <h6><i class="fas fa-filter me-1"></i> Filters</h6>
-          <div class="mb-3">
-            <label class="fw-semibold small mb-1">Category</label>
-            <select class="form-select form-select-sm">
-              <option>All Categories</option>
-              <option selected>Mobile Phones</option>
-              <option>Vehicles</option>
-              <option>Property</option>
-              <option>Electronics</option>
-              <option>Fashion</option>
-              <option>Furniture</option>
-            </select>
+          <h6><i class="fas fa-sliders-h"></i> Filters</h6>
+
+          <div class="filter-group">
+            <div class="filter-label">Category</div>
+            <div>
+              <span class="category-pill active">All</span>
+              <span class="category-pill">Vehicles</span>
+              <span class="category-pill">Property</span>
+              <span class="category-pill">Electronics</span>
+              <span class="category-pill">Fashion</span>
+              <span class="category-pill">Furniture</span>
+            </div>
           </div>
-          <div class="mb-3">
-            <label class="fw-semibold small mb-1">Location</label>
+
+          <div class="filter-group">
+            <div class="filter-label">Location</div>
             <select class="form-select form-select-sm">
               <option>All Pakistan</option>
               <option>Karachi</option>
@@ -86,16 +86,18 @@
               <option>Faisalabad</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label class="fw-semibold small mb-1">Price Range</label>
+
+          <div class="filter-group">
+            <div class="filter-label">Price Range</div>
             <div class="price-inputs">
               <input type="number" placeholder="Min">
               <span class="text-muted">-</span>
               <input type="number" placeholder="Max">
             </div>
           </div>
-          <div class="mb-3">
-            <label class="fw-semibold small mb-1">Condition</label>
+
+          <div class="filter-group">
+            <div class="filter-label">Condition</div>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="new">
               <label class="form-check-label" for="new">New</label>
@@ -104,9 +106,14 @@
               <input class="form-check-input" type="checkbox" id="used">
               <label class="form-check-label" for="used">Used</label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="likeNew">
+              <label class="form-check-label" for="likeNew">Like New</label>
+            </div>
           </div>
-          <div class="mb-3">
-            <label class="fw-semibold small mb-1">Posted Within</label>
+
+          <div class="filter-group">
+            <div class="filter-label">Posted Within</div>
             <select class="form-select form-select-sm">
               <option>Anytime</option>
               <option>Today</option>
@@ -115,21 +122,23 @@
               <option>Last 30 days</option>
             </select>
           </div>
-          <button class="btn btn-post-ad w-100 py-2" style="border-radius:6px;">Apply Filters</button>
-          <button class="btn btn-outline-secondary w-100 mt-2 py-2" style="border-radius:6px;">Clear All</button>
+
+          <button class="btn-primary-custom w-100 py-2" style="font-size:13px;">Apply Filters</button>
+          <button class="btn w-100 mt-2 py-2" style="border-radius:50px;border:1px solid var(--border);font-size:13px;font-weight:600;">Clear All</button>
         </div>
       </div>
 
       <!-- ============ RESULTS ============ -->
       <div class="col-lg-9">
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
           <div>
-            <span class="fw-bold">48 ads</span> found for "iPhone"
-            <span class="badge bg-secondary ms-2">Mobile Phones</span>
+            <span class="fw-bold" id="resultCount" style="font-size:15px;">48 ads</span>
+            <span style="color:var(--text-muted);font-size:14px;"> found for "iPhone"</span>
+            <span class="badge" style="background:var(--primary-light);color:var(--primary);font-weight:600;font-size:12px;padding:4px 12px;border-radius:20px;margin-left:8px;">Mobile Phones</span>
           </div>
           <div class="d-flex align-items-center gap-2">
-            <small class="text-muted">Sort:</small>
-            <select class="form-select form-select-sm" style="width:auto;">
+            <small style="color:var(--text-muted);font-size:13px;">Sort:</small>
+            <select class="form-select form-select-sm" style="width:auto;border-radius:8px;border-color:var(--border);">
               <option>Newest First</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -138,114 +147,17 @@
           </div>
         </div>
 
-        <div class="row g-3">
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone+15" alt="iPhone 15">
-                <button class="fav-btn active"><i class="fas fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 1,20,000</div>
-                <div class="title">iPhone 15 Pro Max 256GB - Brand New</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> 2 hours ago</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Lahore</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone+14" alt="iPhone 14">
-                <button class="fav-btn"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 85,000</div>
-                <div class="title">iPhone 14 Pro 128GB - Excellent Condition</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> Yesterday</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone+13" alt="iPhone 13">
-                <button class="fav-btn"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 65,000</div>
-                <div class="title">iPhone 13 - 128GB - PTA Approved</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> 2 days ago</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Islamabad</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone+12" alt="iPhone 12">
-                <button class="fav-btn"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 50,000</div>
-                <div class="title">iPhone 12 64GB - Good Condition - Box Packed</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> 4 days ago</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Faisalabad</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=iPhone+SE" alt="iPhone SE">
-                <button class="fav-btn"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 35,000</div>
-                <div class="title">iPhone SE 2022 - 64GB - PTA Approved</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> 1 week ago</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Rawalpindi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-4">
-            <div class="ad-card" data-href="product-detail.html">
-              <div class="img-wrap">
-                <img src="https://placehold.co/600x400/e9ecef/002f34?text=AirPods" alt="AirPods">
-                <button class="fav-btn"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="card-body">
-                <div class="price">PKR 12,000</div>
-                <div class="title">Apple AirPods Pro 2nd Gen - Original</div>
-                <div class="meta">
-                  <span><i class="far fa-clock"></i> 1 week ago</span>
-                  <span><i class="fas fa-map-marker-alt"></i> Karachi</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-3" id="adsContainer"></div>
 
         <!-- ============ PAGINATION ============ -->
         <nav class="mt-4">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled"><a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+          <ul class="pagination justify-content-center" style="gap:4px;">
+            <li class="page-item disabled"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);"><i class="fas fa-chevron-left"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-primary);">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-primary);">3</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-primary);">4</a></li>
+            <li class="page-item"><a class="page-link" href="#" style="border-radius:50%;border:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);"><i class="fas fa-chevron-right"></i></a></li>
           </ul>
         </nav>
       </div>
@@ -257,37 +169,40 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
-          <h6><i class="fas fa-store-alt me-2"></i>MarketPlace</h6>
-          <p style="font-size:14px;">Pakistan's fastest growing online classified marketplace.</p>
+          <h6><i class="fas fa-store-alt me-2" style="color:var(--primary);"></i>PakBazaar</h6>
+          <p style="font-size:14px;opacity:0.7;">Pakistan ka apna bazaar.</p>
         </div>
-        <div class="col-6 col-md-2">
-          <h6>Popular</h6>
-          <a href="#">Cars</a>
-          <a href="#">Mobiles</a>
-          <a href="#">Houses</a>
-          <a href="#">Bikes</a>
-        </div>
-        <div class="col-6 col-md-2">
-          <h6>About</h6>
-          <a href="about.html">About Us</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div class="col-6 col-md-2">
-          <h6>Help</h6>
-          <a href="#">FAQ</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-        </div>
-        <div class="col-6 col-md-2">
-          <h6>Follow Us</h6>
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-          <a href="#">Twitter</a>
-        </div>
+        <div class="col-6 col-md-2"><h6>Popular</h6><a href="#">Cars</a><a href="#">Mobiles</a><a href="#">Houses</a><a href="#">Bikes</a></div>
+        <div class="col-6 col-md-2"><h6>About</h6><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
+        <div class="col-6 col-md-2"><h6>Help</h6><a href="#">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+        <div class="col-6 col-md-2"><h6>Follow</h6><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a></div>
       </div>
-      <div class="footer-bottom text-center">&copy; 2026 MarketPlace. All rights reserved.</div>
+      <div class="footer-bottom text-center">&copy; 2026 PakBazaar. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <div class="bottom-tab-bar">
+    <a href="../index.html" class="tab-item">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="../pages/product-listing.html" class="tab-item active">
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    </a>
+    <a href="../pages/post-ad.html" class="tab-item sell-tab">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="../pages/messages.html" class="tab-item" data-messages-tab>
+      <i class="fas fa-comment"></i>
+      <span>Messages</span>
+    </a>
+    <a href="../pages/profile.html" class="tab-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>

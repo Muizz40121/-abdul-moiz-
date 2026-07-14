@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile - MarketPlace</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <title>My Profile - PakBazaar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -13,7 +14,7 @@
   <header class="main-header">
     <div class="container">
       <nav class="navbar navbar-expand-lg p-0">
-        <a class="navbar-brand fw-bold fs-4" href="../index.html" style="color:var(--primary);"><i class="fas fa-store-alt"></i> MarketPlace</a>
+        <a class="navbar-brand fw-bold" href="../index.html"><i class="fas fa-store-alt"></i> PakBazaar</a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,7 +23,7 @@
             <li class="nav-item"><a class="nav-link" href="my-ads.html">My Ads</a></li>
             <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
             <li class="nav-item"><a class="nav-link" href="messages.html">Messages</a></li>
-            <li class="nav-item"><a class="nav-link active fw-bold" href="profile.html">Profile</a></li>
+            <li class="nav-item"><a class="nav-link active fw-bold" href="profile.html" style="color:var(--primary);">Profile</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="far fa-user-circle me-1"></i><span data-user-name>User</span></a>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -36,72 +37,78 @@
   </header>
 
   <div class="container py-4">
-    <h4 class="fw-bold mb-4"><i class="fas fa-user-circle me-2 text-primary-custom"></i>My Profile</h4>
+    <h4 class="fw-bold mb-4" style="font-size:1.3rem;"><i class="fas fa-user-circle me-2" style="color:var(--primary);"></i>My Profile</h4>
 
     <div class="row g-4">
       <div class="col-lg-4">
         <div class="post-ad-form text-center">
-          <img src="https://placehold.co/200x200/e9ecef/002f34?text=User" alt="Profile" class="rounded-circle" style="width:120px;height:120px;object-fit:cover;">
-          <h5 class="fw-bold mt-3">Ahmed Khan</h5>
-          <p class="text-muted small">Joined Jan 2024</p>
-          <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-camera me-1"></i> Change Photo</button>
+          <div style="position:relative;display:inline-block;">
+            <img src="https://placehold.co/200x200/e9ecef/002f34?text=User" alt="Profile" class="rounded-circle" style="width:120px;height:120px;object-fit:cover;border:3px solid var(--primary-light);" data-profile-avatar>
+            <div style="position:absolute;bottom:4px;right:4px;background:var(--primary);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;font-size:12px;cursor:pointer;"><i class="fas fa-camera"></i></div>
+          </div>
+          <h5 class="fw-bold mt-3" data-profile-name>Ahmed Khan</h5>
+          <p class="text-muted small" data-profile-joined>Joined Jan 2024</p>
           <hr>
           <div class="d-flex justify-content-around">
-            <div><strong>12</strong><br><small class="text-muted">Ads</small></div>
-            <div><strong>48</strong><br><small class="text-muted">Sold</small></div>
-            <div><strong>4.8</strong><br><small class="text-muted">Rating</small></div>
+            <div><strong style="font-size:1.2rem;">12</strong><br><small class="text-muted">Ads</small></div>
+            <div><strong style="font-size:1.2rem;">48</strong><br><small class="text-muted">Sold</small></div>
+            <div><strong style="font-size:1.2rem;">4.8</strong><br><small class="text-muted">Rating</small></div>
           </div>
         </div>
       </div>
       <div class="col-lg-8">
         <div class="post-ad-form">
-          <div class="section-title"><i class="fas fa-edit me-2 text-primary-custom"></i>Edit Profile</div>
-          <form>
+          <div class="section-title"><i class="fas fa-edit"></i> Edit Profile</div>
+          <form id="profileForm">
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label fw-semibold">First Name</label>
-                <input type="text" class="form-control" value="Ahmed">
+                <input type="text" class="form-control" id="profileFirstName" value="Ahmed">
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Last Name</label>
-                <input type="text" class="form-control" value="Khan">
+                <input type="text" class="form-control" id="profileLastName" value="Khan">
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Email</label>
-                <input type="email" class="form-control" value="ahmed.khan@email.com">
+                <input type="email" class="form-control" id="profileEmail" value="ahmed.khan@email.com" disabled data-profile-email>
               </div>
               <div class="col-md-6">
                 <label class="form-label fw-semibold">Phone</label>
-                <input type="tel" class="form-control" value="0300-1234567">
+                <input type="tel" class="form-control" id="profilePhone" value="0300-1234567" data-profile-phone>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Location</label>
+                <input type="text" class="form-control" id="profileLocation" value="Lahore" data-profile-location>
               </div>
               <div class="col-12">
                 <label class="form-label fw-semibold">About Me</label>
                 <textarea class="form-control" rows="3" placeholder="Tell buyers about yourself...">I'm a professional seller based in Lahore. Quality products with warranty.</textarea>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-post-ad px-4"><i class="fas fa-save me-2"></i>Save Changes</button>
+                <button type="submit" class="btn-primary-custom px-4"><i class="fas fa-save me-2"></i>Save Changes</button>
               </div>
             </div>
           </form>
 
           <hr class="my-4">
-          <div class="section-title"><i class="fas fa-lock me-2 text-primary-custom"></i>Change Password</div>
-          <form>
+          <div class="section-title"><i class="fas fa-lock"></i> Change Password</div>
+          <form id="passwordForm">
             <div class="row g-3">
               <div class="col-md-4">
                 <label class="form-label fw-semibold">Current Password</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" id="currentPassword">
               </div>
               <div class="col-md-4">
                 <label class="form-label fw-semibold">New Password</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" id="newPassword">
               </div>
               <div class="col-md-4">
                 <label class="form-label fw-semibold">Confirm New</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" id="confirmPassword">
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-outline-secondary px-4">Update Password</button>
+                <button type="submit" class="btn" style="border-radius:50px;border:1px solid var(--border);font-weight:600;padding:10px 28px;">Update Password</button>
               </div>
             </div>
           </form>
@@ -114,17 +121,40 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
-          <h6><i class="fas fa-store-alt me-2"></i>MarketPlace</h6>
-          <p style="font-size:14px;">Pakistan's fastest growing online classified marketplace.</p>
+          <h6><i class="fas fa-store-alt me-2" style="color:var(--primary);"></i>PakBazaar</h6>
+          <p style="font-size:14px;opacity:0.7;">Pakistan ka apna bazaar.</p>
         </div>
         <div class="col-6 col-md-2"><h6>Popular</h6><a href="#">Cars</a><a href="#">Mobiles</a><a href="#">Houses</a></div>
         <div class="col-6 col-md-2"><h6>About</h6><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
         <div class="col-6 col-md-2"><h6>Help</h6><a href="#">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a></div>
         <div class="col-6 col-md-2"><h6>Follow</h6><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a></div>
       </div>
-      <div class="footer-bottom text-center">&copy; 2026 MarketPlace. All rights reserved.</div>
+      <div class="footer-bottom text-center">&copy; 2026 PakBazaar. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <div class="bottom-tab-bar">
+    <a href="../index.html" class="tab-item">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="../pages/product-listing.html" class="tab-item">
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    </a>
+    <a href="../pages/post-ad.html" class="tab-item sell-tab">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="../pages/messages.html" class="tab-item" data-messages-tab>
+      <i class="fas fa-comment"></i>
+      <span>Messages</span>
+    </a>
+    <a href="../pages/profile.html" class="tab-item active">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>

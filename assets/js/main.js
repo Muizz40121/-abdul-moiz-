@@ -1,7 +1,7 @@
 const API = {
   base: (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:5000/api' : '/api',
-  token: () => Store.get('olx_token'),
-  user: () => JSON.parse(Store.get('olx_user') || 'null'),
+  token: () => Store.get('pakbazaar_token'),
+  user: () => JSON.parse(Store.get('pakbazaar_user') || 'null'),
   headers(extra) {
     const h = { 'Content-Type': 'application/json', ...extra };
     const t = this.token(); if (t) h.Authorization = `Bearer ${t}`;
@@ -9,8 +9,8 @@ const API = {
   },
   async handle(r) {
     if (r.status === 401) {
-      Store.remove('olx_token');
-      Store.remove('olx_user');
+      Store.remove('pakbazaar_token');
+      Store.remove('pakbazaar_user');
       const page = window.location.pathname.split('/').pop();
       window.location.href = 'login.html?redirect=' + encodeURIComponent(page) + '&expired=1';
       throw new Error('Session expired. Redirecting to login...');
@@ -51,24 +51,24 @@ const Store = {
 const Auth = {
   async register(data) {
     const res = await API.post('/auth/register', data);
-    Store.set('olx_token', res.token);
-    Store.set('olx_user', JSON.stringify(res.user));
+    Store.set('pakbazaar_token', res.token);
+    Store.set('pakbazaar_user', JSON.stringify(res.user));
     return res;
   },
   async login(data) {
     const res = await API.post('/auth/login', data);
-    Store.set('olx_token', res.token);
-    Store.set('olx_user', JSON.stringify(res.user));
+    Store.set('pakbazaar_token', res.token);
+    Store.set('pakbazaar_user', JSON.stringify(res.user));
     return res;
   },
   logout() {
-    Store.remove('olx_token');
-    Store.remove('olx_user');
+    Store.remove('pakbazaar_token');
+    Store.remove('pakbazaar_user');
     window.location.href = '/';
   },
   isLoggedIn() { return !!this.token(); },
-  token() { return Store.get('olx_token'); },
-  getUser() { return JSON.parse(Store.get('olx_user') || 'null'); },
+  token() { return Store.get('pakbazaar_token'); },
+  getUser() { return JSON.parse(Store.get('pakbazaar_user') || 'null'); },
   getFullName(u) { return u ? u.name : ''; }
 };
 
@@ -89,13 +89,11 @@ function handleRegister(e) {
   e.preventDefault();
   const msg = document.getElementById('registerMessage');
   if (!msg) return;
-  const password = document.getElementById('regPassword').value;
-  const confirm = document.getElementById('regConfirmPassword').value;
+  const password = document.getElementById('registerPassword').value;
   if (password.length < 8) { msg.className = 'alert alert-danger'; msg.textContent = 'Password must be at least 8 characters.'; msg.classList.remove('d-none'); return; }
-  if (password !== confirm) { msg.className = 'alert alert-danger'; msg.textContent = 'Passwords do not match.'; msg.classList.remove('d-none'); return; }
   Auth.register({
-    name: (document.getElementById('regFirstName').value.trim() + ' ' + document.getElementById('regLastName').value.trim()).trim(),
-    email: document.getElementById('regEmail').value.trim(),
+    name: document.getElementById('registerName').value.trim(),
+    email: document.getElementById('registerEmail').value.trim(),
     password: password
   }).then(() => {
     msg.className = 'alert alert-success'; msg.textContent = 'Account created! Redirecting...'; msg.classList.remove('d-none');
@@ -192,7 +190,7 @@ async function initProductDetail() {
   try {
     const data = await API.get(`/ads/${id}`);
     const a = data.ad;
-    document.title = `${a.title} - OLX Marketplace`;
+    document.title = `${a.title} - PakBazaar`;
     document.querySelectorAll('.product-info-card h4').forEach(el => el.textContent = a.title);
     document.querySelectorAll('.price-large').forEach(el => el.textContent = `PKR ${Number(a.price).toLocaleString()}`);
     const breadcrumb = document.querySelector('.breadcrumb');
@@ -357,7 +355,7 @@ async function initMyAds() {
       btn.addEventListener('click', async function (e) { e.preventDefault(); try { await API.patch(`/ads/${this.dataset.id}/sold`); location.reload(); } catch (err) { alert(err.message); } });
     });
     container.querySelectorAll('.delete-ad').forEach(btn => {
-      btn.addEventListener('click', async function (e) { e.preventDefault(); if (!confirm('Delete this ad?')) return; try { await API.deleteete(`/ads/${this.dataset.id}`); location.reload(); } catch (err) { alert(err.message); } });
+      btn.addEventListener('click', async function (e) { e.preventDefault(); if (!confirm('Delete this ad?')) return; try { await API.delete(`/ads/${this.dataset.id}`); location.reload(); } catch (err) { alert(err.message); } });
     });
   } catch (e) { console.error('Failed to load my ads:', e); container.innerHTML = '<div class="col-12 text-center py-5"><h5 class="text-muted">Failed to load your ads.</h5></div>'; }
 }
@@ -382,47 +380,66 @@ async function initMessages() {
   const chatBody = document.getElementById('chatBody');
   const chatHeader = document.getElementById('chatHeader');
   const chatForm = document.getElementById('chatForm');
+  const chatEmpty = document.getElementById('chatEmpty');
+  const chatActive = document.getElementById('chatActive');
+  const container = document.querySelector('.messages-container');
   if (!list) return;
   const params = new URLSearchParams(window.location.search);
+  const user = Auth.getUser();
+  function getInitial(name) { return (name || '?')[0].toUpperCase(); }
+  function showChat() {
+    if (chatEmpty) chatEmpty.classList.add('d-none');
+    if (chatActive) chatActive.classList.remove('d-none');
+    if (chatForm) chatForm.classList.remove('d-none');
+    if (container) container.classList.add('chat-open');
+  }
   try {
     const data = await API.get('/messages/conversations');
     if (data.conversations.length === 0) {
-      if (params.get('ad')) {
-        list.innerHTML = '<div class="text-center text-muted p-4">Select a conversation from the list.</div>';
-      } else {
-        list.innerHTML = '<div class="text-center text-muted p-4">No conversations yet.</div>';
-      }
+      list.innerHTML = '<div class="msg-list-empty"><i class="far fa-comment-dots"></i><p>No conversations yet</p><small>Start a conversation by contacting a seller</small></div>';
       return;
     }
     list.innerHTML = data.conversations.map(c => {
-      const otherName = c.buyer_id === Auth.getUser()?.id ? c.seller_name : c.buyer_name;
-      const unread = c.unread_count > 0 ? `<span class="badge bg-danger rounded-pill ms-auto">${c.unread_count}</span>` : '';
+      const otherName = c.buyer_id === user?.id ? c.seller_name : c.buyer_name;
+      const unread = c.unread_count > 0 ? `<span class="unread-badge">${c.unread_count}</span>` : '';
       return `<div class="msg-preview ${c.unread_count > 0 ? 'unread' : ''}" data-id="${c.id}">
-        <div class="d-flex align-items-center"><span class="fw-medium name">${otherName}</span><small class="time ms-auto">${c.last_message_at ? timeAgo(c.last_message_at) : ''}</small>${unread}</div>
-        <small class="text-muted d-block">Re: ${c.product_title}</small>
-        <small class="preview-text d-block">${c.last_message || ''}</small></div>`;
+        <div class="conv-avatar">${getInitial(otherName)}</div>
+        <div class="conv-info">
+          <div class="conv-top"><span class="name">${otherName}</span><span class="time">${c.last_message_at ? timeAgo(c.last_message_at) : ''}</span></div>
+          <div class="conv-product">${c.product_title || ''}</div>
+          <div class="preview-text">${c.last_message || 'Start chatting...'}</div>
+        </div>
+        ${unread}</div>`;
     }).join('');
     list.querySelectorAll('.msg-preview').forEach(el => {
       el.addEventListener('click', async function () {
         list.querySelectorAll('.msg-preview').forEach(p => p.classList.remove('active'));
         this.classList.add('active');
+        this.classList.remove('unread');
+        const badge = this.querySelector('.unread-badge');
+        if (badge) badge.remove();
         const convId = this.dataset.id;
         const conv = data.conversations.find(c => c.id == convId);
-        const otherName = conv.buyer_id === Auth.getUser()?.id ? conv.seller_name : conv.buyer_name;
-        if (chatHeader) chatHeader.innerHTML = `<strong>${otherName}</strong> <small class="text-muted">Re: ${conv.product_title}</small>`;
+        const otherName = conv.buyer_id === user?.id ? conv.seller_name : conv.buyer_name;
+        showChat();
+        chatHeader.innerHTML = `<div class="header-left"><div class="header-avatar">${getInitial(otherName)}</div><div class="header-info"><strong>${otherName}</strong><br><small class="text-muted">Re: ${conv.product_title}</small></div></div>`;
+        chatBody.innerHTML = '<div class="text-center text-muted py-4"><div class="spinner-border spinner-border-sm"></div> Loading...</div>';
+        chatForm.dataset.convId = convId;
+        chatForm.dataset.productId = conv.product_id;
+        chatForm.dataset.receiverId = conv.buyer_id === user?.id ? conv.seller_id : conv.buyer_id;
         await API.patch(`/messages/read/${convId}`);
-        const msgs = await API.get(`/messages/conversations/${convId}`);
-        if (chatBody) {
-          chatBody.innerHTML = msgs.messages.map(m => {
-            const isMe = m.sender_id === Auth.getUser()?.id;
-            return `<div class="message ${isMe ? 'sent' : 'received'}"><div class="msg-text">${m.message}</div><small class="msg-time">${timeAgo(m.created_at)}</small></div>`;
-          }).join('');
-          chatBody.scrollTop = chatBody.scrollHeight;
-        }
-        if (chatForm) {
-          chatForm.dataset.convId = convId;
-          chatForm.style.display = '';
-        }
+        try {
+          const msgs = await API.get(`/messages/conversations/${convId}`);
+          if (msgs.messages.length === 0) {
+            chatBody.innerHTML = '<div class="text-center text-muted py-4">No messages yet. Say hello!</div>';
+          } else {
+            chatBody.innerHTML = msgs.messages.map(m => {
+              const isMe = m.sender_id === user?.id;
+              return `<div class="message ${isMe ? 'sent' : 'received'}"><div class="msg-text">${m.message}</div><small class="msg-time">${timeAgo(m.created_at)}</small></div>`;
+            }).join('');
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }
+        } catch { chatBody.innerHTML = '<div class="text-center text-muted py-4">Could not load messages.</div>'; }
       });
     });
     if (chatForm) {
@@ -431,23 +448,28 @@ async function initMessages() {
         const input = this.querySelector('input');
         if (!input.value.trim()) return;
         const convId = this.dataset.convId;
+        const productId = this.dataset.productId;
+        const receiverId = this.dataset.receiverId;
+        if (!convId) return;
+        const text = input.value.trim();
+        input.value = '';
         try {
-          const conv = data.conversations.find(c => c.id == convId);
-          const receiver_id = conv.buyer_id === Auth.getUser()?.id ? conv.seller_id : conv.buyer_id;
-          const res = await API.post('/messages/send', { product_id: conv.product_id, receiver_id, message: input.value.trim() });
+          await API.post('/messages/send', { product_id: Number(productId), receiver_id: Number(receiverId), message: text });
           const msgEl = document.createElement('div');
           msgEl.className = 'message sent';
-          msgEl.innerHTML = `<div class="msg-text">${input.value}</div><small class="msg-time">Just now</small>`;
+          msgEl.innerHTML = `<div class="msg-text">${text}</div><small class="msg-time">Just now</small>`;
           if (chatBody) { chatBody.appendChild(msgEl); chatBody.scrollTop = chatBody.scrollHeight; }
-          input.value = '';
-        } catch (err) { alert(err.message); }
+          const previewEl = list.querySelector(`.msg-preview[data-id="${convId}"] .preview-text`);
+          if (previewEl) previewEl.textContent = text;
+        } catch (err) { alert('Error: ' + err.message); input.value = text; }
       });
     }
-    if (params.get('user')) {
+    const autoConv = params.get('user') || params.get('ad');
+    if (autoConv) {
       const first = list.querySelector('.msg-preview');
       if (first) first.click();
     }
-  } catch (e) { console.error('Failed to load messages:', e); }
+  } catch (e) { console.error('Failed to load messages:', e); list.innerHTML = '<div class="msg-list-empty"><i class="fas fa-exclamation-triangle"></i><p>Failed to load messages</p></div>'; }
 }
 
 async function initProfile() {
@@ -474,7 +496,7 @@ async function initProfile() {
           phone: document.getElementById('profilePhone').value.trim(),
           location: document.getElementById('profileLocation').value.trim()
         });
-        Store.set('olx_user', JSON.stringify(res.user));
+        Store.set('pakbazaar_user', JSON.stringify(res.user));
         updateAuthUI();
         initProfile();
         alert('Profile updated!');
@@ -523,7 +545,7 @@ async function checkAdminAccess() {
   if (user && user.is_admin === 1) return true;
   try {
     const data = await API.get('/auth/me');
-    if (data.user && data.user.is_admin === 1) { Store.set('olx_user', JSON.stringify(data.user)); return true; }
+    if (data.user && data.user.is_admin === 1) { Store.set('pakbazaar_user', JSON.stringify(data.user)); return true; }
   } catch {}
   window.location.href = '../index.html';
   return false;
@@ -772,6 +794,29 @@ document.addEventListener('DOMContentLoaded', function () {
     if (msg) { msg.className = 'alert alert-warning'; msg.textContent = 'Session expired. Please login again.'; msg.classList.remove('d-none'); }
   }
   updateAuthUI();
+
+  // ==================== 4D PARALLAX EFFECT ====================
+  const heroBg = document.getElementById('heroBg');
+  if (heroBg) {
+    const shapes = heroBg.querySelectorAll('.shape');
+    const orbs = heroBg.querySelectorAll('.orb');
+    document.addEventListener('mousemove', function (e) {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      shapes.forEach((el, i) => {
+        const depth = (i + 1) * 3;
+        el.style.setProperty('--mx', `${x * depth}px`);
+        el.style.setProperty('--my', `${y * depth}px`);
+      });
+      orbs.forEach((el, i) => {
+        const depth = (i + 1) * 5;
+        el.style.setProperty('--mx', `${x * depth}px`);
+        el.style.setProperty('--my', `${y * depth}px`);
+      });
+    });
+    // Disable parallax on mobile touch
+    document.addEventListener('touchstart', function () { heroBg.style.translate = 'none'; }, { once: true });
+  }
   const page = window.location.pathname.split('/').pop();
   document.querySelectorAll('[data-logout]').forEach(btn => { btn.addEventListener('click', function (e) { e.preventDefault(); Auth.logout(); }); });
   const registerForm = document.getElementById('registerForm');
@@ -790,7 +835,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!Auth.isLoggedIn()) { window.location.href = 'login.html?redirect=' + page; return; }
       const active = this.classList.contains('active');
       try {
-        if (active) { await API.deleteete(`/favorites/${id}`); this.classList.remove('active'); this.querySelector('i').className = 'far fa-heart'; }
+        if (active) { await API.delete(`/favorites/${id}`); this.classList.remove('active'); this.querySelector('i').className = 'far fa-heart'; }
         else { await API.post(`/favorites/${id}`); this.classList.add('active'); this.querySelector('i').className = 'fas fa-heart'; }
       } catch (err) { console.error(err); }
     });

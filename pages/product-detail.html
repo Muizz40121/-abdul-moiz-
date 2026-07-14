@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iPhone 15 Pro Max - MarketPlace</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <title>Product Detail - PakBazaar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -13,18 +14,18 @@
   <header class="main-header">
     <div class="container">
       <nav class="navbar navbar-expand-lg p-0">
-        <a class="navbar-brand fw-bold fs-4" href="../index.html" style="color:var(--primary);"><i class="fas fa-store-alt"></i> MarketPlace</a>
+        <a class="navbar-brand fw-bold" href="../index.html"><i class="fas fa-store-alt"></i> PakBazaar</a>
         <div class="d-flex d-lg-none gap-2">
-          <a href="post-ad.html" class="btn-post-ad btn-sm py-1 px-3">+ Sell</a>
+          <a href="post-ad.html" class="btn-post-ad btn-sm py-1 px-3" style="font-size:12px;">+ Sell</a>
           <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
         <div class="collapse navbar-collapse" id="mainNav">
           <div class="d-flex flex-grow-1 align-items-center justify-content-end gap-3 my-2 my-lg-0">
-            <a href="login.html" class="text-dark text-nowrap d-none d-lg-inline" data-guest-menu><i class="far fa-user-circle me-1"></i> Login</a>
+            <a href="login.html" class="text-dark text-nowrap d-none d-lg-inline fw-medium" data-guest-menu style="font-size:14px;"><i class="far fa-user-circle me-1"></i> Login</a>
             <div class="dropdown d-none d-lg-inline-block" data-user-menu style="display:none;">
-              <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" style="background:none;border:none;color:var(--text-dark);">
+              <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" style="background:none;border:none;color:var(--text-primary);font-weight:500;">
                 <i class="far fa-user-circle me-1"></i> <span data-user-name>User</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -33,7 +34,7 @@
                 <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
                 <li><a class="dropdown-item" href="messages.html"><i class="fas fa-comment me-2"></i>Messages</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li data-admin-menu class="hidden"><a class="dropdown-item" href="../admin/index.html"><i class="fas fa-shield-alt me-2 text-danger"></i>Admin Panel</a></li>
+                <li data-admin-menu class="hidden"><a class="dropdown-item" href="../admin/index.html"><i class="fas fa-shield-alt me-2"></i>Admin Panel</a></li>
                 <li><a class="dropdown-item text-danger" href="#" data-logout><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
               </ul>
             </div>
@@ -49,7 +50,7 @@
       <ol class="breadcrumb mb-0 small">
         <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
         <li class="breadcrumb-item"><a href="product-listing.html">Mobile Phones</a></li>
-        <li class="breadcrumb-item active" aria-current="page">iPhone 15 Pro Max</li>
+        <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
       </ol>
     </div>
   </nav>
@@ -59,80 +60,65 @@
       <!-- ============ GALLERY ============ -->
       <div class="col-lg-7">
         <div class="product-detail">
-          <div class="gallery-main">
-            <img src="https://placehold.co/800x500/e9ecef/002f34?text=iPhone+15+Pro+Max" alt="iPhone 15 Pro Max">
+          <div class="gallery-wrap">
+            <img src="https://placehold.co/800x500/e9ecef/002f34?text=Product" alt="Product" class="gallery-main" id="mainImage">
           </div>
-          <div class="gallery-thumbs">
-            <img src="https://placehold.co/200x150/e9ecef/002f34?text=Front" alt="Front" class="active">
-            <img src="https://placehold.co/200x150/e9ecef/002f34?text=Back" alt="Back">
-            <img src="https://placehold.co/200x150/e9ecef/002f34?text=Side" alt="Side">
-            <img src="https://placehold.co/200x150/e9ecef/002f34?text=Box" alt="Box">
-          </div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
         </div>
+
         <div class="product-info-card mt-3 d-block d-lg-none">
-          <div class="price-large">PKR 1,20,000</div>
-          <h4 class="fw-bold mt-2">iPhone 15 Pro Max 256GB - Brand New - PTA Approved</h4>
+          <div class="price-large" id="mobilePrice">PKR 0</div>
+          <h4 class="fw-bold mt-2" id="mobileTitle">Product Title</h4>
         </div>
 
         <div class="product-info-card mt-3">
-          <h5 class="fw-bold"><i class="fas fa-info-circle me-2 text-primary-custom"></i>Details</h5>
-          <table class="table table-borderless mt-3">
-            <tr><td class="detail-label ps-0">Condition</td><td>New</td></tr>
-            <tr><td class="detail-label ps-0">Brand</td><td>Apple</td></tr>
-            <tr><td class="detail-label ps-0">Model</td><td>iPhone 15 Pro Max</td></tr>
-            <tr><td class="detail-label ps-0">Storage</td><td>256GB</td></tr>
-            <tr><td class="detail-label ps-0">Color</td><td>Natural Titanium</td></tr>
-            <tr><td class="detail-label ps-0">PTA Approved</td><td>Yes</td></tr>
-            <tr><td class="detail-label ps-0">Warranty</td><td>1 Year Official</td></tr>
-            <tr><td class="detail-label ps-0">Location</td><td>Lahore, Punjab</td></tr>
-            <tr><td class="detail-label ps-0">Posted</td><td>2 hours ago</td></tr>
-            <tr><td class="detail-label ps-0">Views</td><td>245</td></tr>
+          <h5 class="fw-bold mb-0" style="font-size:1rem;"><i class="fas fa-info-circle me-2" style="color:var(--primary);"></i>Details</h5>
+          <table class="table table-borderless mt-3 detail-table">
+            <tbody id="detailTable">
+              <tr><td class="detail-label">Condition</td><td><span class="condition-badge new">New</span></td></tr>
+              <tr><td class="detail-label">Category</td><td id="detailCategory">-</td></tr>
+              <tr><td class="detail-label">Location</td><td id="detailLocation">-</td></tr>
+              <tr><td class="detail-label">Posted</td><td id="detailPosted">-</td></tr>
+              <tr><td class="detail-label">Views</td><td id="detailViews">-</td></tr>
+            </tbody>
           </table>
         </div>
 
         <div class="product-info-card mt-3">
-          <h5 class="fw-bold"><i class="fas fa-align-left me-2 text-primary-custom"></i>Description</h5>
-          <p class="mt-3 description" style="font-size:14px;line-height:1.7;">
-            Selling my iPhone 15 Pro Max 256GB in Natural Titanium color. The phone is brand new, sealed box, PTA approved with official warranty. 
-            Features include the new A17 Pro chip, 48MP main camera, 5x optical zoom, USB-C port, and Action button.
-            <br><br>
-            Box includes: iPhone, USB-C cable, documentation. Charger not included (as per Apple's new policy).
-            <br><br>
-            Reason for selling: Upgrading to iPhone 17. 
-            Serious buyers only please. Delivery available within Lahore.
-          </p>
+          <h5 class="fw-bold mb-0" style="font-size:1rem;"><i class="fas fa-align-left me-2" style="color:var(--primary);"></i>Description</h5>
+          <p class="mt-3 description" id="productDescription" style="font-size:14px;line-height:1.7;color:var(--text-primary);">Loading...</p>
         </div>
       </div>
 
       <!-- ============ SIDEBAR ============ -->
       <div class="col-lg-5">
         <div class="product-info-card d-none d-lg-block">
-          <div class="price-large">PKR 1,20,000</div>
-          <h4 class="fw-bold mt-2">iPhone 15 Pro Max 256GB - Brand New - PTA Approved</h4>
+          <div class="price-large" id="desktopPrice">PKR 0</div>
+          <h4 class="fw-bold mt-2" id="desktopTitle">Product Title</h4>
         </div>
 
         <div class="seller-card mt-3">
-          <img src="https://placehold.co/200x200/e9ecef/002f34?text=User" alt="Seller" class="avatar-lg">
-          <h6 class="fw-bold">Ahmed Khan</h6>
-          <p class="text-muted small mb-2 seller-location"><i class="fas fa-map-marker-alt me-1"></i> Lahore, Punjab</p>
-          <p class="text-muted small mb-3 seller-meta"><i class="far fa-clock me-1"></i> Member since Jan 2024</p>
+          <img src="https://placehold.co/200x200/e9ecef/002f34?text=User" alt="Seller" class="avatar-lg" id="sellerAvatar">
+          <h6 class="fw-bold" id="sellerName">Seller Name <span class="badge-verified"><i class="fas fa-check-circle"></i> Verified</span></h6>
+          <p class="text-muted small mb-2 seller-location"><i class="fas fa-map-marker-alt me-1"></i> <span id="sellerLocation">Location</span></p>
+          <p class="text-muted small mb-3 seller-meta"><i class="far fa-clock me-1"></i> Active on PakBazaar</p>
           <div class="d-grid gap-2">
-            <a href="messages.html" class="btn btn-post-ad py-2 btn-chat" style="border-radius:6px;">
+            <a href="messages.html" class="btn-post-ad py-2 btn-chat d-block text-center" style="font-size:14px;">
               <i class="fas fa-comment-dots me-2"></i>Chat with Seller
             </a>
-            <button class="btn btn-outline-secondary py-2 seller-phone" style="border-radius:6px;">
-              <i class="fas fa-phone-alt me-2"></i>Show Phone Number
+            <button class="btn py-2 seller-phone" style="border-radius:50px;border:1px solid var(--border);font-size:14px;font-weight:600;background:var(--bg-card);">
+              <i class="fas fa-phone-alt me-2" style="color:var(--success);"></i>Show Phone Number
             </button>
-            <button class="btn btn-outline-danger py-2" style="border-radius:6px;">
+            <button class="btn py-2" style="border-radius:50px;border:1px solid var(--border);font-size:14px;font-weight:600;color:var(--accent);background:var(--bg-card);">
               <i class="fas fa-flag me-2"></i>Report Ad
             </button>
           </div>
         </div>
 
         <div class="product-info-card mt-3 product-chat-box hidden" id="productChatBox">
-          <h6 class="fw-bold mb-3"><i class="fas fa-comment-dots me-2 text-primary-custom"></i>Chat with Seller</h6>
+          <h6 class="fw-bold mb-3" style="font-size:14px;"><i class="fas fa-comment-dots me-2" style="color:var(--primary);"></i>Chat with Seller</h6>
           <div class="chat-header d-flex justify-content-between align-items-center mb-2" id="productChatHeader">
-            <strong id="productChatSellerName">Seller</strong>
+            <strong id="productChatSellerName" style="font-size:14px;">Seller</strong>
           </div>
           <div class="chat-body product-chat-body" id="productChatBody">
             <div class="text-center text-muted py-4">Loading messages...</div>
@@ -144,23 +130,21 @@
         </div>
 
         <div class="product-info-card mt-3">
-          <h6 class="fw-bold"><i class="fas fa-shield-alt me-2 text-success"></i>Safety Tips</h6>
-          <ul class="small text-muted mb-0 ps-3 mt-2" style="line-height:1.8;">
-            <li>Meet in a public place</li>
-            <li>Check product before paying</li>
-            <li>Don't pay in advance</li>
-            <li>Verify seller identity</li>
+          <h6 class="fw-bold mb-0" style="font-size:14px;"><i class="fas fa-shield-alt me-2" style="color:var(--success);"></i>Safety Tips</h6>
+          <ul class="small text-muted mb-0 ps-3 mt-3" style="line-height:2;">
+            <li><i class="fas fa-user-friends me-1" style="color:var(--primary);"></i> Meet in a public place</li>
+            <li><i class="fas fa-search me-1" style="color:var(--primary);"></i> Check product before paying</li>
+            <li><i class="fas fa-money-bill-wave me-1" style="color:var(--accent);"></i> Don't pay in advance</li>
+            <li><i class="fas fa-id-card me-1" style="color:var(--primary);"></i> Verify seller identity</li>
           </ul>
         </div>
 
         <div class="product-info-card mt-3 d-flex justify-content-between align-items-center">
-          <div>
-            <i class="fas fa-share-alt me-2"></i> Share this ad
-          </div>
+          <div style="font-weight:600;font-size:14px;"><i class="fas fa-share-alt me-2" style="color:var(--primary);"></i> Share this ad</div>
           <div class="d-flex gap-2">
-            <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fab fa-facebook-messenger"></i></a>
-            <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-link"></i></a>
+            <a href="#" class="btn btn-sm" style="border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:#25D366;"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="btn btn-sm" style="border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:#0066FF;"><i class="fab fa-facebook-messenger"></i></a>
+            <a href="#" class="btn btn-sm" style="border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:var(--text-muted);"><i class="fas fa-link"></i></a>
           </div>
         </div>
       </div>
@@ -168,54 +152,8 @@
 
     <!-- ============ SIMILAR ADS ============ -->
     <section class="mt-5">
-      <h5 class="fw-bold mb-3"><i class="fas fa-tags me-2 text-primary-custom"></i>Similar Ads</h5>
-      <div class="row g-3" id="similarAds">
-              <div class="price">PKR 85,000</div>
-              <div class="title">iPhone 14 Pro 128GB</div>
-              <div class="meta"><span><i class="fas fa-map-marker-alt"></i> Karachi</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="ad-card" data-href="product-detail.html">
-            <div class="img-wrap">
-              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Samsung+S24" alt="Samsung S24">
-              <button class="fav-btn"><i class="far fa-heart"></i></button>
-            </div>
-            <div class="card-body">
-              <div class="price">PKR 95,000</div>
-              <div class="title">Samsung Galaxy S24 Ultra</div>
-              <div class="meta"><span><i class="fas fa-map-marker-alt"></i> Lahore</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="ad-card" data-href="product-detail.html">
-            <div class="img-wrap">
-              <img src="https://placehold.co/600x400/e9ecef/002f34?text=Pixel+8" alt="Pixel 8">
-              <button class="fav-btn"><i class="far fa-heart"></i></button>
-            </div>
-            <div class="card-body">
-              <div class="price">PKR 75,000</div>
-              <div class="title">Google Pixel 8 Pro 128GB</div>
-              <div class="meta"><span><i class="fas fa-map-marker-alt"></i> Islamabad</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="ad-card" data-href="product-detail.html">
-            <div class="img-wrap">
-              <img src="https://placehold.co/600x400/e9ecef/002f34?text=AirPods+Pro" alt="AirPods Pro">
-              <button class="fav-btn"><i class="far fa-heart"></i></button>
-            </div>
-            <div class="card-body">
-              <div class="price">PKR 12,000</div>
-              <div class="title">Apple AirPods Pro 2nd Gen</div>
-              <div class="meta"><span><i class="fas fa-map-marker-alt"></i> Karachi</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h5 class="fw-bold mb-3" style="font-size:1.1rem;"><i class="fas fa-tags me-2" style="color:var(--primary);"></i>Similar Ads</h5>
+      <div class="row g-3" id="similarAds"></div>
     </section>
   </div>
 
@@ -223,27 +161,40 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
-          <h6><i class="fas fa-store-alt me-2"></i>MarketPlace</h6>
-          <p style="font-size:14px;">Pakistan's fastest growing online classified marketplace.</p>
+          <h6><i class="fas fa-store-alt me-2" style="color:var(--primary);"></i>PakBazaar</h6>
+          <p style="font-size:14px;opacity:0.7;">Pakistan ka apna bazaar.</p>
         </div>
-        <div class="col-6 col-md-2">
-          <h6>Popular</h6>
-          <a href="#">Cars</a>
-          <a href="#">Mobiles</a>
-          <a href="#">Houses</a>
-          <a href="#">Bikes</a>
-        </div>
-        <div class="col-6 col-md-2">
-          <h6>About</h6>
-          <a href="about.html">About Us</a>
-          <a href="contact.html">Contact</a>
-        </div>
+        <div class="col-6 col-md-2"><h6>Popular</h6><a href="#">Cars</a><a href="#">Mobiles</a><a href="#">Houses</a><a href="#">Bikes</a></div>
+        <div class="col-6 col-md-2"><h6>About</h6><a href="about.html">About Us</a><a href="contact.html">Contact</a></div>
         <div class="col-6 col-md-2"><h6>Help</h6><a href="#">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a></div>
         <div class="col-6 col-md-2"><h6>Follow</h6><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a></div>
       </div>
-      <div class="footer-bottom text-center">&copy; 2026 MarketPlace. All rights reserved.</div>
+      <div class="footer-bottom text-center">&copy; 2026 PakBazaar. All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <div class="bottom-tab-bar">
+    <a href="../index.html" class="tab-item">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="../pages/product-listing.html" class="tab-item">
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    </a>
+    <a href="../pages/post-ad.html" class="tab-item sell-tab">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+    <a href="../pages/messages.html" class="tab-item" data-messages-tab>
+      <i class="fas fa-comment"></i>
+      <span>Messages</span>
+    </a>
+    <a href="../pages/profile.html" class="tab-item">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </a>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>
